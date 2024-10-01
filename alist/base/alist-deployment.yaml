@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: alist
+  name: alist
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: alist
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: alist
+    spec:
+      containers:
+        - env:
+            - name: PGID
+              value: "0"
+            - name: PUID
+              value: "0"
+            - name: UMASK
+              value: "022"
+          image: xhofe/alist-aria2:latest
+          name: alist
+          ports:
+            - containerPort: 5244
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /opt/alist/data
+              name: alist-data
+            - mountPath: /MyData
+              name: mydata
+      restartPolicy: Always
+      volumes:
+        - name: alist-data
+          hostPath:
+            path: /mnt/Tank/AppData/AList/Data
+            type: DirectoryOrCreate
+        - name: mydata
+          hostPath:
+            path: /mnt/Tank/MyData
+            type: DirectoryOrCreate
