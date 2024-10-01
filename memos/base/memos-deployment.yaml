@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: memos
+  name: memos
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: memos
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: memos
+    spec:
+      containers:
+        - env:
+            - name: MEMOS_DRIVER
+              value: mysql
+            - name: MEMOS_DSN
+              value: root:root@tcp(192.168.8.100:13306)/memos_prod
+          image: neosmemo/memos:stable
+          name: memos
+          ports:
+            - containerPort: 5230
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /var/opt/memos
+              name: memos-data
+      restartPolicy: Always
+      volumes:
+        - name: memos-data
+          hostPath:
+            path: /mnt/Tank/AppData/Memos/Data
+            type: DirectoryOrCreate
