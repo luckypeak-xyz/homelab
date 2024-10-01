@@ -2,19 +2,19 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: memos
-  name: memos
+    app: memos-web
+  name: memos-web
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: memos
+      app: memos-web
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: memos
+        app: memos-web
     spec:
       containers:
         - env:
@@ -22,10 +22,8 @@ spec:
               value: mysql
             - name: MEMOS_DSN
               value: root:root@tcp(192.168.8.100:13306)/memos_prod
-            - name: MEMOS_PORT
-              value: 5230
           image: neosmemo/memos:stable
-          name: memos
+          name: memos-web
           ports:
             - containerPort: 5230
               protocol: TCP

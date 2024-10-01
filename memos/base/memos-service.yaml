@@ -2,15 +2,15 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: memos
-  name: memos
+    app: memos-web
+  name: memos-web
 spec:
   ports:
-    - name: memos
+    - name: memos-web
       port: 5230
       targetPort: 5230
       protocol: TCP
       nodePort: 30230
   type: NodePort
   selector:
-    app: memos
+    app: memos-web
