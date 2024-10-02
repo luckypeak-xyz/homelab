@@ -10,7 +10,6 @@ spec:
       port: 5700
       targetPort: 5700
       protocol: TCP
-      nodePort: 35700
-  type: NodePort
+  type: ClusterIP
   selector:
     app: qinglong
