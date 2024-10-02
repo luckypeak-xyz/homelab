@@ -21,7 +21,7 @@ spec:
             - name: QlBaseUrl
               value: /
             - name: QlPort
-              value: 5700
+              value: "5700"
           image: whyour/qinglong:latest
           name: qinglong
           ports:
