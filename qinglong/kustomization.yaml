@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
   - ./base/qinglong-service.yaml
   - ./base/qinglong-deployment.yaml
+  - ./base/qinglong-ingress.yaml
