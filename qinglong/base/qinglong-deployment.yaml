@@ -25,7 +25,7 @@ spec:
           image: whyour/qinglong:latest
           name: qinglong
           ports:
-            - containerPort: 5230
+            - containerPort: 5700
               protocol: TCP
           volumeMounts:
             - mountPath: /ql/data
