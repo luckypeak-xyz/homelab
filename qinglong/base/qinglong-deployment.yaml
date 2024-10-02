@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: qinglong
+  name: qinglong
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: qinglong
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: qinglong
+    spec:
+      containers:
+        - env:
+            - name: QlBaseUrl
+              value: /
+            - name: QlPort
+              value: 5700
+          image: whyour/qinglong:latest
+          name: qinglong
+          ports:
+            - containerPort: 5230
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /ql/data
+              name: qinglong-data
+      restartPolicy: Always
+      volumes:
+        - name: qinglong-data
+          hostPath:
+            path: /mnt/Tank/AppData/Qinglong/Data
+            type: DirectoryOrCreate

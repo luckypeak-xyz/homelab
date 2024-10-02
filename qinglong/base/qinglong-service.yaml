@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: qinglong
+  name: qinglong
+spec:
+  ports:
+    - name: qinglong
+      port: 5700
+      targetPort: 5700
+      protocol: TCP
+      nodePort: 35700
+  type: NodePort
+  selector:
+    app: qinglong
