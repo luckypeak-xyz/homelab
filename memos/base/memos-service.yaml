@@ -10,7 +10,7 @@ spec:
       port: 5230
       targetPort: 5230
       protocol: TCP
-      nodePort: 30230
+      nodePort: 30231
   type: NodePort
   selector:
     app: memos-web
